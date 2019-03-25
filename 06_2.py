@@ -1,4 +1,5 @@
 # 手写数字识别
+#优化器使用
 import tensorflow as tf
 
 from tensorflow.examples.tutorials.mnist import input_data
@@ -25,7 +26,11 @@ predition = tf.nn.softmax(tf.matmul(x, W) + b)
 loss = tf.reduce_mean(tf.square(y - predition))
 
 # 使用梯度下降法
-train_step = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
+#train_step = tf.train.GradientDescentOptimizer(0.2).minimize(loss)
+train_step = tf.train.AdamOptimizer(1e-2).minimize(loss)
+
+
+
 init = tf.global_variables_initializer()
 
 # 求准确率的方法
